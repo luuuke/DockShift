@@ -1,0 +1,366 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A336E3911889D36D004D4BED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A336E3901889D36D004D4BED /* Foundation.framework */; };
+		A336E3A21889D36D004D4BED /* DockShift.mm in Sources */ = {isa = PBXBuildFile; fileRef = A336E3A11889D36D004D4BED /* DockShift.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A336E38D1889D36D004D4BED /* DockShift.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DockShift.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		A336E3901889D36D004D4BED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A336E3951889D36D004D4BED /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		A336E3961889D36D004D4BED /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		A336E3981889D36D004D4BED /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		A336E39C1889D36D004D4BED /* DockShift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DockShift.plist; path = Package/Library/PreferenceLoader/Preferences/DockShift.plist; sourceTree = "<group>"; };
+		A336E39D1889D36D004D4BED /* DockShiftIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DockShiftIcon.png; path = Package/Library/PreferenceLoader/Preferences/DockShiftIcon.png; sourceTree = "<group>"; };
+		A336E39E1889D36D004D4BED /* DockShiftIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DockShiftIcon@2x.png"; path = "Package/Library/PreferenceLoader/Preferences/DockShiftIcon@2x.png"; sourceTree = "<group>"; };
+		A336E39F1889D36D004D4BED /* DockShift-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DockShift-Prefix.pch"; sourceTree = "<group>"; };
+		A336E3A01889D36D004D4BED /* DockShift.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = DockShift.xm; sourceTree = "<group>"; };
+		A336E3A11889D36D004D4BED /* DockShift.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DockShift.mm; sourceTree = "<group>"; };
+		A336E3A51889D36D004D4BED /* DockShift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DockShift.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/DockShift.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A336E3891889D36D004D4BED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A336E3911889D36D004D4BED /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A336E3821889D36D004D4BED = {
+			isa = PBXGroup;
+			children = (
+				A336E3921889D36D004D4BED /* DockShift */,
+				A336E38F1889D36D004D4BED /* Frameworks */,
+				A336E38E1889D36D004D4BED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A336E38E1889D36D004D4BED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A336E38D1889D36D004D4BED /* DockShift.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A336E38F1889D36D004D4BED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3901889D36D004D4BED /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A336E3921889D36D004D4BED /* DockShift */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3A01889D36D004D4BED /* DockShift.xm */,
+				A336E3A11889D36D004D4BED /* DockShift.mm */,
+				A336E3931889D36D004D4BED /* Package */,
+				A336E3971889D36D004D4BED /* Supporting Files */,
+			);
+			path = DockShift;
+			sourceTree = "<group>";
+		};
+		A336E3931889D36D004D4BED /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3941889D36D004D4BED /* DEBIAN */,
+				A336E3991889D36D004D4BED /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		A336E3941889D36D004D4BED /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3951889D36D004D4BED /* control.txt */,
+				A336E3961889D36D004D4BED /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		A336E3971889D36D004D4BED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3981889D36D004D4BED /* PackageVersion.plist */,
+				A336E39F1889D36D004D4BED /* DockShift-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A336E3991889D36D004D4BED /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				A336E39A1889D36D004D4BED /* PreferenceLoader */,
+				A336E3A31889D36D004D4BED /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		A336E39A1889D36D004D4BED /* PreferenceLoader */ = {
+			isa = PBXGroup;
+			children = (
+				A336E39B1889D36D004D4BED /* Preferences */,
+			);
+			name = PreferenceLoader;
+			sourceTree = "<group>";
+		};
+		A336E39B1889D36D004D4BED /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				A336E39C1889D36D004D4BED /* DockShift.plist */,
+				A336E39D1889D36D004D4BED /* DockShiftIcon.png */,
+				A336E39E1889D36D004D4BED /* DockShiftIcon@2x.png */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		A336E3A31889D36D004D4BED /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3A41889D36D004D4BED /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		A336E3A41889D36D004D4BED /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				A336E3A51889D36D004D4BED /* DockShift.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A336E38A1889D36D004D4BED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A336E38C1889D36D004D4BED /* DockShift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A336E3A81889D36D004D4BED /* Build configuration list for PBXNativeTarget "DockShift" */;
+			buildPhases = (
+				A336E3871889D36D004D4BED /* ShellScript */,
+				A336E3881889D36D004D4BED /* Sources */,
+				A336E3891889D36D004D4BED /* Frameworks */,
+				A336E38A1889D36D004D4BED /* Headers */,
+				A336E38B1889D36D004D4BED /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DockShift;
+			productName = DockShift;
+			productReference = A336E38D1889D36D004D4BED /* DockShift.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A336E3831889D36D004D4BED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = A336E3861889D36D004D4BED /* Build configuration list for PBXProject "DockShift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A336E3821889D36D004D4BED;
+			productRefGroup = A336E38E1889D36D004D4BED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A336E38C1889D36D004D4BED /* DockShift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A336E3871889D36D004D4BED /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp-logos";
+		};
+		A336E38B1889D36D004D4BED /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A336E3881889D36D004D4BED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A336E3A21889D36D004D4BED /* DockShift.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A336E3A61889D36D004D4BED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		A336E3A71889D36D004D4BED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		A336E3A91889D36D004D4BED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DockShift/DockShift-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		A336E3AA1889D36D004D4BED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DockShift/DockShift-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A336E3861889D36D004D4BED /* Build configuration list for PBXProject "DockShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A336E3A61889D36D004D4BED /* Debug */,
+				A336E3A71889D36D004D4BED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A336E3A81889D36D004D4BED /* Build configuration list for PBXNativeTarget "DockShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A336E3A91889D36D004D4BED /* Debug */,
+				A336E3AA1889D36D004D4BED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A336E3831889D36D004D4BED /* Project object */;
+}
