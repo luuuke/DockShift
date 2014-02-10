@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>entry</key>
+	<dict>
+		<key>cell</key>
+		<string>PSLinkCell</string>
+		<key>icon</key>
+		<string>de.ng.DockShift.png</string>
+		<key>label</key>
+		<string>DockShift</string>
+	</dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>de.ng.DockShift</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>de.ng.DockShift.settingsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Choose style</string>
+		</dict>
+		<dict>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>defaults</key>
+			<string>de.ng.DockShift</string>
+			<key>default</key>
+			<integer>7</integer>
+			<key>key</key>
+			<string>style</string>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>label</key>
+			<string>Style</string>
+			<key>PostNotification</key>
+			<string>de.ng.DockShift.settingsChanged</string>
+			<key>validTitles</key>
+			<array>
+				<string>Transparent</string>
+				<string>Milk Glass - opaque</string>
+				<string>Milk Glass - bit less opaque</string>
+				<string>Milk Glass - less opaque (default)</string>
+				<string>Milk Glass - bit clear</string>
+				<string>Milk Glass - clearer</string>
+				<string>Milk Glass - clear</string>
+				<string>Dark Milk Glass - opaque</string>
+				<string>Dark Milk Glass - bit less opaque</string>
+				<string>Blurried - most blurry</string>
+				<string>Blurried - in between</string>
+				<string>Blurried - clearer</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+				<integer>6</integer>
+				<integer>7</integer>
+				<integer>8</integer>
+				<integer>9</integer>
+				<integer>10</integer>
+				<integer>11</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Dock size alterations</string>
+			<key>footerText</key>
+			<string>Small also streches the icon layout vertically, you may need to respring after applying this setting.</string>
+		</dict>
+		<dict>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>defaults</key>
+			<string>de.ng.DockShift</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>key</key>
+			<string>dockmode</string>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>label</key>
+			<string>Mode</string>
+			<key>PostNotification</key>
+			<string>de.ng.DockShift.settingsChanged</string>
+			<key>validTitles</key>
+			<array>
+				<string>Default</string>
+				<string>Small with labels</string>
+				<string>Small without labels</string>
+				<string>Small with icons seated on bottom</string>
+				<string>Default with icons lowered</string>
+				<string>Default with icons seated on bottom</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Centers the page dots when using the transparent setting, you may need to respring after applying this setting.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>de.ng.DockShift</string>
+			<key>key</key>
+			<string>shiftedpagecontrol</string>
+			<key>label</key>
+			<string>Shift page dots down</string>
+			<key>PostNotification</key>
+			<string>de.ng.DockShift.settingsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>If you can see a 1px white line above the dock, apply this setting and respring.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>de.ng.DockShift</string>
+			<key>key</key>
+			<string>forcewhitelineremoval</string>
+			<key>label</key>
+			<string>Force 1px white line removal</string>
+			<key>PostNotification</key>
+			<string>de.ng.DockShift.settingsChanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>by NG / napster-grey; moreover /u/DudleyC and /u/deeco212 for the Flex patch the size option evolved from.</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DockShift</string>
+</dict>
+</plist>
