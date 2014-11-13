@@ -131,27 +131,27 @@ static NSInteger _landscapeStyleIndex=3;
 #pragma mark - Functions
 
 static void loadSettings(){
-    LWLog(@"loading settings");
-    NSDictionary* settings=(NSDictionary *)CFPreferencesCopyMultiple(CFPreferencesCopyKeyList(CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost), CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-    LWLog(@"%@", settings);
+	LWLog(@"loading settings");
+	NSDictionary* settings=(NSDictionary *)CFPreferencesCopyMultiple(CFPreferencesCopyKeyList(CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost), CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	LWLog(@"%@", settings);
 	if (!settings) {
 		return;
 	}
 	
 	id temp=[settings objectForKey:@"style"];
 	_styleIndex=temp ? [temp integerValue] : 3;
-    LWLog(@"loadSettings _styleIndex: %i", _styleIndex);
+	LWLog(@"loadSettings _styleIndex: %i", _styleIndex);
 	if(_styleIndex < 0 || _styleIndex > 11){
 		_styleIndex=3;
 	}
 	
-    temp=[settings objectForKey:@"landscapeStyle"];
-    _landscapeStyleIndex=temp ? [temp integerValue] : 3;
-    LWLog(@"loadSettings _landscapeStyleIndex: %i", _landscapeStyleIndex);
-    if(_landscapeStyleIndex < 0 || _landscapeStyleIndex > 11){
-        _landscapeStyleIndex=3;
-    }
-    
+	temp=[settings objectForKey:@"landscapeStyle"];
+	_landscapeStyleIndex=temp ? [temp integerValue] : 3;
+	LWLog(@"loadSettings _landscapeStyleIndex: %i", _landscapeStyleIndex);
+	if(_landscapeStyleIndex < 0 || _landscapeStyleIndex > 11){
+		_landscapeStyleIndex=3;
+	}
+	
 	temp=[settings objectForKey:@"enabled"];
 	_enabled=temp ? [temp boolValue] : NO;
 	
@@ -235,19 +235,19 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 -(void)updateDockBackgroundStyle{
 	id currentBackgroundView=MSHookIvar<id>(self, "_backgroundView");
 	if([currentBackgroundView isMemberOfClass:[%c(SBWallpaperEffectView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
-        LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
-        UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
-        if([%c(SBClockDataProvider) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
-            //iOS 8.1 exclusive
-            LWLog(@"orientation is landscape");
-            [(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; //11=default for 7.1+
-        }else{
-            //iOS 7.1 and 8.1
-            LWLog(@"orientation is portrait or we're on iOS7");
-            [(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR71:11]; //11=default for 7.1+
-        }
+		LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
+		UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
+		if([%c(SBClockDataProvider) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
+			//iOS 8.1 exclusive
+			LWLog(@"orientation is landscape");
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; //11=default for 7.1+
+		}else{
+			//iOS 7.1 and 8.1
+			LWLog(@"orientation is portrait or we're on iOS7");
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR71:11]; //11=default for 7.1+
+		}
 	}else if([currentBackgroundView isMemberOfClass:[%c(_SBDockBackgroundView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
-        LWLog(@"Updating background style for iOS 7.0");
+		LWLog(@"Updating background style for iOS 7.0");
 		//iOS 7.0
 		[(_SBDockBackgroundView*)currentBackgroundView setStyle:_enabled?STYLEFOR70:7/* 7=default for 7.0*/];
 	}
@@ -257,15 +257,15 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 %new
 -(void)removeWhiteLine{
 	if(_enabled){
-        LWLog(@"Removing annoying white line");
-        SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
+		LWLog(@"Removing annoying white line");
+		SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
 		
 		if(_forcewhitelineremoval || _styleIndex==0){
-            [highlightView removeFromSuperview];
-            [highlightView setHidden:YES];
-            [highlightView setAlpha:0];
-        }
-    }
+			[highlightView removeFromSuperview];
+			[highlightView setHidden:YES];
+			[highlightView setAlpha:0];
+		}
+	}
 }
 
 %end
@@ -344,20 +344,20 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 %hook SBDockView
 
 -(CGFloat)heightForOrientation:(NSInteger)orientation{
-    CGFloat r=%orig;
-    if(_dockMode != DEFAULT){
-        if(_dockMode==SMALLWITHLABELS){
-            r=_oniPad?111:88;
-        }else if(_dockMode==SMALLWITHOUTLABELS){
-            r=_oniPad?90:69;
-        }else if(_dockMode==SMALLSEATEDICONS){
-            r=_oniPad?76:60;
-        }else if(_dockMode==NONESTRETCHED){
-            r=-10;
-        }
-    }
-    
-    return r;
+	CGFloat r=%orig;
+	if(_dockMode != DEFAULT){
+		if(_dockMode==SMALLWITHLABELS){
+			r=_oniPad?111:88;
+		}else if(_dockMode==SMALLWITHOUTLABELS){
+			r=_oniPad?90:69;
+		}else if(_dockMode==SMALLSEATEDICONS){
+			r=_oniPad?76:60;
+		}else if(_dockMode==NONESTRETCHED){
+			r=-10;
+		}
+	}
+	
+	return r;
 }
 
 %end
@@ -371,11 +371,11 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 				   my_UIAccessibilityEnhanceBackgroundContrast,
 				   &their_UIAccessibilityEnhanceBackgroundContrast);
 	
-    %init(SpringBoard_General);
-    if(![%c(SBClockDataProvider) class]){
-        //7.1
-        %init(SpringBoard_iOS7);
-    }
-    
+	%init(SpringBoard_General);
+	if(![%c(SBClockDataProvider) class]){
+		//7.1
+		%init(SpringBoard_iOS7);
+	}
+	
 	LWLog(@"constructor is done");
 }
