@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A336E3911889D36D004D4BED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A336E3901889D36D004D4BED /* Foundation.framework */; };
 		A336E3A21889D36D004D4BED /* DockShift.mm in Sources */ = {isa = PBXBuildFile; fileRef = A336E3A11889D36D004D4BED /* DockShift.mm */; };
+		A336E3AC1889D381004D4BED /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A336E3AB1889D381004D4BED /* libsubstrate.dylib */; };
+		A3CC7FF51891384800F4D753 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CC7FF41891384800F4D753 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,13 +19,15 @@
 		A336E3951889D36D004D4BED /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
 		A336E3961889D36D004D4BED /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
 		A336E3981889D36D004D4BED /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
-		A336E39C1889D36D004D4BED /* DockShift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DockShift.plist; path = Package/Library/PreferenceLoader/Preferences/DockShift.plist; sourceTree = "<group>"; };
-		A336E39D1889D36D004D4BED /* DockShiftIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DockShiftIcon.png; path = Package/Library/PreferenceLoader/Preferences/DockShiftIcon.png; sourceTree = "<group>"; };
-		A336E39E1889D36D004D4BED /* DockShiftIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DockShiftIcon@2x.png"; path = "Package/Library/PreferenceLoader/Preferences/DockShiftIcon@2x.png"; sourceTree = "<group>"; };
 		A336E39F1889D36D004D4BED /* DockShift-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DockShift-Prefix.pch"; sourceTree = "<group>"; };
-		A336E3A01889D36D004D4BED /* DockShift.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = DockShift.xm; sourceTree = "<group>"; };
+		A336E3A01889D36D004D4BED /* DockShift.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = DockShift.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A336E3A11889D36D004D4BED /* DockShift.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DockShift.mm; sourceTree = "<group>"; };
 		A336E3A51889D36D004D4BED /* DockShift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DockShift.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/DockShift.plist; sourceTree = "<group>"; };
+		A336E3AB1889D381004D4BED /* libsubstrate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsubstrate.dylib; path = ../../../../opt/iOSOpenDev/lib/libsubstrate.dylib; sourceTree = "<group>"; };
+		A3CC7FF41891384800F4D753 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD9698C41A00268000AB9FCE /* de.ng.DockShift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = de.ng.DockShift.plist; sourceTree = "<group>"; };
+		CD9698C51A00268000AB9FCE /* de.ng.DockShift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = de.ng.DockShift.png; sourceTree = "<group>"; };
+		CD9698C61A00268000AB9FCE /* de.ng.DockShift@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "de.ng.DockShift@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CC7FF51891384800F4D753 /* UIKit.framework in Frameworks */,
+				A336E3AC1889D381004D4BED /* libsubstrate.dylib in Frameworks */,
 				A336E3911889D36D004D4BED /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +64,8 @@
 		A336E38F1889D36D004D4BED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3CC7FF41891384800F4D753 /* UIKit.framework */,
+				A336E3AB1889D381004D4BED /* libsubstrate.dylib */,
 				A336E3901889D36D004D4BED /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -67,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				A336E3A01889D36D004D4BED /* DockShift.xm */,
-				A336E3A11889D36D004D4BED /* DockShift.mm */,
 				A336E3931889D36D004D4BED /* Package */,
 				A336E3971889D36D004D4BED /* Supporting Files */,
 			);
@@ -95,6 +102,7 @@
 		A336E3971889D36D004D4BED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A336E3A11889D36D004D4BED /* DockShift.mm */,
 				A336E3981889D36D004D4BED /* PackageVersion.plist */,
 				A336E39F1889D36D004D4BED /* DockShift-Prefix.pch */,
 			);
@@ -104,28 +112,10 @@
 		A336E3991889D36D004D4BED /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				A336E39A1889D36D004D4BED /* PreferenceLoader */,
+				CD9698C21A00268000AB9FCE /* PreferenceLoader */,
 				A336E3A31889D36D004D4BED /* MobileSubstrate */,
 			);
 			name = Library;
-			sourceTree = "<group>";
-		};
-		A336E39A1889D36D004D4BED /* PreferenceLoader */ = {
-			isa = PBXGroup;
-			children = (
-				A336E39B1889D36D004D4BED /* Preferences */,
-			);
-			name = PreferenceLoader;
-			sourceTree = "<group>";
-		};
-		A336E39B1889D36D004D4BED /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				A336E39C1889D36D004D4BED /* DockShift.plist */,
-				A336E39D1889D36D004D4BED /* DockShiftIcon.png */,
-				A336E39E1889D36D004D4BED /* DockShiftIcon@2x.png */,
-			);
-			name = Preferences;
 			sourceTree = "<group>";
 		};
 		A336E3A31889D36D004D4BED /* MobileSubstrate */ = {
@@ -142,6 +132,25 @@
 				A336E3A51889D36D004D4BED /* DockShift.plist */,
 			);
 			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+		CD9698C21A00268000AB9FCE /* PreferenceLoader */ = {
+			isa = PBXGroup;
+			children = (
+				CD9698C31A00268000AB9FCE /* Preferences */,
+			);
+			name = PreferenceLoader;
+			path = Package/Library/PreferenceLoader;
+			sourceTree = "<group>";
+		};
+		CD9698C31A00268000AB9FCE /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				CD9698C41A00268000AB9FCE /* de.ng.DockShift.plist */,
+				CD9698C51A00268000AB9FCE /* de.ng.DockShift.png */,
+				CD9698C61A00268000AB9FCE /* de.ng.DockShift@2x.png */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,7 +235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp\nlocalrespring";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -268,7 +277,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
 				iOSOpenDevPath = /opt/iOSOpenDev;
@@ -293,7 +302,7 @@
 				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				iOSOpenDevPath = /opt/iOSOpenDev;
@@ -309,6 +318,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DockShift/DockShift-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
@@ -329,6 +342,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DockShift/DockShift-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
@@ -359,6 +376,7 @@
 				A336E3AA1889D36D004D4BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
