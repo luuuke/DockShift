@@ -365,16 +365,6 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 %end
 
 
-%group SpringBoard_iOS8
-
-%hook SBDockView
-
-
-
-%end
-
-%end
-
 %ctor {
 	loadSettings();
 	MSHookFunction(_UIAccessibilityEnhanceBackgroundContrast,
