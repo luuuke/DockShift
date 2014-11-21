@@ -132,27 +132,27 @@ static NSInteger _landscapeStyleIndex=3;
 #pragma mark - Functions
 
 static void loadSettings(){
-    LWLog(@"loading settings");
-    NSDictionary* settings=(NSDictionary *)CFPreferencesCopyMultiple(CFPreferencesCopyKeyList(CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost), CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-    LWLog(@"%@", settings);
+	LWLog(@"loading settings");
+	NSDictionary* settings=(NSDictionary *)CFPreferencesCopyMultiple(CFPreferencesCopyKeyList(CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost), CFSTR("de.ng.DockShift"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	LWLog(@"%@", settings);
 	if (!settings) {
 		return;
 	}
 	
 	id temp=[settings objectForKey:@"style"];
 	_styleIndex=temp ? [temp integerValue] : 3;
-    LWLog(@"loadSettings _styleIndex: %i", _styleIndex);
+	LWLog(@"loadSettings _styleIndex: %i", _styleIndex);
 	if(_styleIndex < 0 || _styleIndex > 11){
 		_styleIndex=3;
 	}
 	
-    temp=[settings objectForKey:@"landscapeStyle"];
-    _landscapeStyleIndex=temp ? [temp integerValue] : 3;
-    LWLog(@"loadSettings _landscapeStyleIndex: %i", _landscapeStyleIndex);
-    if(_landscapeStyleIndex < 0 || _landscapeStyleIndex > 11){
-        _landscapeStyleIndex=3;
-    }
-    
+	temp=[settings objectForKey:@"landscapeStyle"];
+	_landscapeStyleIndex=temp ? [temp integerValue] : 3;
+	LWLog(@"loadSettings _landscapeStyleIndex: %i", _landscapeStyleIndex);
+	if(_landscapeStyleIndex < 0 || _landscapeStyleIndex > 11){
+		_landscapeStyleIndex=3;
+	}
+	
 	temp=[settings objectForKey:@"enabled"];
 	_enabled=temp ? [temp boolValue] : NO;
 	
@@ -179,9 +179,9 @@ static void settingsChanged(CFNotificationCenterRef center, void *observer, CFSt
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class _SBDockBackgroundView; @class UIView; @class SBDockIconListView; @class SBIconListPageControl; @class SBIconController; @class SBWallpaperEffectView; @class SBClockDataProvider; @class SBDockView; @class SpringBoard; 
+@class SBClockDataProvider; @class SBIconController; @class SBWallpaperEffectView; @class SpringBoard; @class SBDockIconListView; @class UIView; @class _SBDockBackgroundView; @class SBDockView; @class SBIconListPageControl; 
 
-static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBIconController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBIconController"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBWallpaperEffectView(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBWallpaperEffectView"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBClockDataProvider(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBClockDataProvider"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$_SBDockBackgroundView(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("_SBDockBackgroundView"); } return _klass; }
+static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBIconController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBIconController"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBClockDataProvider(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBClockDataProvider"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$_SBDockBackgroundView(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("_SBDockBackgroundView"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$SBWallpaperEffectView(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("SBWallpaperEffectView"); } return _klass; }
 #line 179 "/Users/ng/Dropbox/DockShift/DockShift/DockShift.xm"
 static void updateDockBackgroundView(){
 	id dockView=[[[[_logos_static_class_lookup$SBIconController() sharedInstance] _rootFolderController] contentView] dockView];
@@ -242,19 +242,19 @@ static void _logos_method$SpringBoard_General$SBDockView$layoutSubviews(SBDockVi
 static void _logos_method$SpringBoard_General$SBDockView$updateDockBackgroundStyle(SBDockView* self, SEL _cmd){
 	id currentBackgroundView=MSHookIvar<id>(self, "_backgroundView");
 	if([currentBackgroundView isMemberOfClass:[_logos_static_class_lookup$SBWallpaperEffectView() class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
-        LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
-        UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
-        if([_logos_static_class_lookup$SBClockDataProvider() class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
-            
-            LWLog(@"orientation is landscape");
-            [(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; 
-        }else{
-            
-            LWLog(@"orientation is portrait or we're on iOS7");
-            [(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR71:11]; 
-        }
+		LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
+		UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
+		if(!_oniPad && [_logos_static_class_lookup$SBClockDataProvider() class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
+			
+			LWLog(@"orientation is landscape");
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; 
+		}else{
+			
+			LWLog(@"orientation is portrait or we're on iOS7");
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR71:11]; 
+		}
 	}else if([currentBackgroundView isMemberOfClass:[_logos_static_class_lookup$_SBDockBackgroundView() class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
-        LWLog(@"Updating background style for iOS 7.0");
+		LWLog(@"Updating background style for iOS 7.0");
 		
 		[(_SBDockBackgroundView*)currentBackgroundView setStyle:_enabled?STYLEFOR70:7];
 	}
@@ -264,15 +264,15 @@ static void _logos_method$SpringBoard_General$SBDockView$updateDockBackgroundSty
 
 static void _logos_method$SpringBoard_General$SBDockView$removeWhiteLine(SBDockView* self, SEL _cmd){
 	if(_enabled){
-        LWLog(@"Removing annoying white line");
-        SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
+		LWLog(@"Removing annoying white line");
+		SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
 		
 		if(_forcewhitelineremoval || _styleIndex==0){
-            [highlightView removeFromSuperview];
-            [highlightView setHidden:YES];
-            [highlightView setAlpha:0];
-        }
-    }
+			[highlightView removeFromSuperview];
+			[highlightView setHidden:YES];
+			[highlightView setAlpha:0];
+		}
+	}
 }
 
 
@@ -351,20 +351,20 @@ static CGFloat (*_logos_orig$SpringBoard_iOS7$SBDockView$heightForOrientation$)(
 
 
 static CGFloat _logos_method$SpringBoard_iOS7$SBDockView$heightForOrientation$(SBDockView* self, SEL _cmd, NSInteger orientation){
-    CGFloat r=_logos_orig$SpringBoard_iOS7$SBDockView$heightForOrientation$(self, _cmd, orientation);
-    if(_dockMode != DEFAULT){
-        if(_dockMode==SMALLWITHLABELS){
-            r=_oniPad?111:88;
-        }else if(_dockMode==SMALLWITHOUTLABELS){
-            r=_oniPad?90:69;
-        }else if(_dockMode==SMALLSEATEDICONS){
-            r=_oniPad?76:60;
-        }else if(_dockMode==NONESTRETCHED){
-            r=-10;
-        }
-    }
-    
-    return r;
+	CGFloat r=_logos_orig$SpringBoard_iOS7$SBDockView$heightForOrientation$(self, _cmd, orientation);
+	if(_dockMode != DEFAULT){
+		if(_dockMode==SMALLWITHLABELS){
+			r=_oniPad?111:88;
+		}else if(_dockMode==SMALLWITHOUTLABELS){
+			r=_oniPad?90:69;
+		}else if(_dockMode==SMALLSEATEDICONS){
+			r=_oniPad?76:60;
+		}else if(_dockMode==NONESTRETCHED){
+			r=-10;
+		}
+	}
+	
+	return r;
 }
 
 
@@ -372,27 +372,17 @@ static CGFloat _logos_method$SpringBoard_iOS7$SBDockView$heightForOrientation$(S
 
 
 
-
-
-
-
-
-
-
-
-
-
-static __attribute__((constructor)) void _logosLocalCtor_a3250946() {
+static __attribute__((constructor)) void _logosLocalCtor_5d9d255a() {
 	loadSettings();
 	MSHookFunction(_UIAccessibilityEnhanceBackgroundContrast,
 				   my_UIAccessibilityEnhanceBackgroundContrast,
 				   &their_UIAccessibilityEnhanceBackgroundContrast);
 	
-    {Class _logos_class$SpringBoard_General$SBDockView = objc_getClass("SBDockView"); MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(initWithDockListView:forSnapshot:), (IMP)&_logos_method$SpringBoard_General$SBDockView$initWithDockListView$forSnapshot$, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$initWithDockListView$forSnapshot$);MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(_backgroundContrastDidChange:), (IMP)&_logos_method$SpringBoard_General$SBDockView$_backgroundContrastDidChange$, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$_backgroundContrastDidChange$);MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(layoutSubviews), (IMP)&_logos_method$SpringBoard_General$SBDockView$layoutSubviews, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$layoutSubviews);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SpringBoard_General$SBDockView, @selector(updateDockBackgroundStyle), (IMP)&_logos_method$SpringBoard_General$SBDockView$updateDockBackgroundStyle, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SpringBoard_General$SBDockView, @selector(removeWhiteLine), (IMP)&_logos_method$SpringBoard_General$SBDockView$removeWhiteLine, _typeEncoding); }Class _logos_class$SpringBoard_General$SBDockIconListView = objc_getClass("SBDockIconListView"); MSHookMessageEx(_logos_class$SpringBoard_General$SBDockIconListView, @selector(topIconInset), (IMP)&_logos_method$SpringBoard_General$SBDockIconListView$topIconInset, (IMP*)&_logos_orig$SpringBoard_General$SBDockIconListView$topIconInset);Class _logos_class$SpringBoard_General$SBIconListPageControl = objc_getClass("SBIconListPageControl"); MSHookMessageEx(_logos_class$SpringBoard_General$SBIconListPageControl, @selector(setBounds:), (IMP)&_logos_method$SpringBoard_General$SBIconListPageControl$setBounds$, (IMP*)&_logos_orig$SpringBoard_General$SBIconListPageControl$setBounds$);MSHookMessageEx(_logos_class$SpringBoard_General$SBIconListPageControl, @selector(layoutSubviews), (IMP)&_logos_method$SpringBoard_General$SBIconListPageControl$layoutSubviews, (IMP*)&_logos_orig$SpringBoard_General$SBIconListPageControl$layoutSubviews);Class _logos_class$SpringBoard_General$SpringBoard = objc_getClass("SpringBoard"); MSHookMessageEx(_logos_class$SpringBoard_General$SpringBoard, @selector(applicationDidFinishLaunching:), (IMP)&_logos_method$SpringBoard_General$SpringBoard$applicationDidFinishLaunching$, (IMP*)&_logos_orig$SpringBoard_General$SpringBoard$applicationDidFinishLaunching$);Class _logos_class$SpringBoard_General$UIView = objc_getClass("UIView"); Class _logos_metaclass$SpringBoard_General$UIView = object_getClass(_logos_class$SpringBoard_General$UIView); MSHookMessageEx(_logos_metaclass$SpringBoard_General$UIView, @selector(_motionEffectsSupported), (IMP)&_logos_meta_method$SpringBoard_General$UIView$_motionEffectsSupported, (IMP*)&_logos_meta_orig$SpringBoard_General$UIView$_motionEffectsSupported);}
-    if(![_logos_static_class_lookup$SBClockDataProvider() class]){
-        
-        {Class _logos_class$SpringBoard_iOS7$SBDockView = objc_getClass("SBDockView"); MSHookMessageEx(_logos_class$SpringBoard_iOS7$SBDockView, @selector(heightForOrientation:), (IMP)&_logos_method$SpringBoard_iOS7$SBDockView$heightForOrientation$, (IMP*)&_logos_orig$SpringBoard_iOS7$SBDockView$heightForOrientation$);}
-    }
-    
+	{Class _logos_class$SpringBoard_General$SBDockView = objc_getClass("SBDockView"); MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(initWithDockListView:forSnapshot:), (IMP)&_logos_method$SpringBoard_General$SBDockView$initWithDockListView$forSnapshot$, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$initWithDockListView$forSnapshot$);MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(_backgroundContrastDidChange:), (IMP)&_logos_method$SpringBoard_General$SBDockView$_backgroundContrastDidChange$, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$_backgroundContrastDidChange$);MSHookMessageEx(_logos_class$SpringBoard_General$SBDockView, @selector(layoutSubviews), (IMP)&_logos_method$SpringBoard_General$SBDockView$layoutSubviews, (IMP*)&_logos_orig$SpringBoard_General$SBDockView$layoutSubviews);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SpringBoard_General$SBDockView, @selector(updateDockBackgroundStyle), (IMP)&_logos_method$SpringBoard_General$SBDockView$updateDockBackgroundStyle, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SpringBoard_General$SBDockView, @selector(removeWhiteLine), (IMP)&_logos_method$SpringBoard_General$SBDockView$removeWhiteLine, _typeEncoding); }Class _logos_class$SpringBoard_General$SBDockIconListView = objc_getClass("SBDockIconListView"); MSHookMessageEx(_logos_class$SpringBoard_General$SBDockIconListView, @selector(topIconInset), (IMP)&_logos_method$SpringBoard_General$SBDockIconListView$topIconInset, (IMP*)&_logos_orig$SpringBoard_General$SBDockIconListView$topIconInset);Class _logos_class$SpringBoard_General$SBIconListPageControl = objc_getClass("SBIconListPageControl"); MSHookMessageEx(_logos_class$SpringBoard_General$SBIconListPageControl, @selector(setBounds:), (IMP)&_logos_method$SpringBoard_General$SBIconListPageControl$setBounds$, (IMP*)&_logos_orig$SpringBoard_General$SBIconListPageControl$setBounds$);MSHookMessageEx(_logos_class$SpringBoard_General$SBIconListPageControl, @selector(layoutSubviews), (IMP)&_logos_method$SpringBoard_General$SBIconListPageControl$layoutSubviews, (IMP*)&_logos_orig$SpringBoard_General$SBIconListPageControl$layoutSubviews);Class _logos_class$SpringBoard_General$SpringBoard = objc_getClass("SpringBoard"); MSHookMessageEx(_logos_class$SpringBoard_General$SpringBoard, @selector(applicationDidFinishLaunching:), (IMP)&_logos_method$SpringBoard_General$SpringBoard$applicationDidFinishLaunching$, (IMP*)&_logos_orig$SpringBoard_General$SpringBoard$applicationDidFinishLaunching$);Class _logos_class$SpringBoard_General$UIView = objc_getClass("UIView"); Class _logos_metaclass$SpringBoard_General$UIView = object_getClass(_logos_class$SpringBoard_General$UIView); MSHookMessageEx(_logos_metaclass$SpringBoard_General$UIView, @selector(_motionEffectsSupported), (IMP)&_logos_meta_method$SpringBoard_General$UIView$_motionEffectsSupported, (IMP*)&_logos_meta_orig$SpringBoard_General$UIView$_motionEffectsSupported);}
+	if(![_logos_static_class_lookup$SBClockDataProvider() class]){
+		
+		{Class _logos_class$SpringBoard_iOS7$SBDockView = objc_getClass("SBDockView"); MSHookMessageEx(_logos_class$SpringBoard_iOS7$SBDockView, @selector(heightForOrientation:), (IMP)&_logos_method$SpringBoard_iOS7$SBDockView$heightForOrientation$, (IMP*)&_logos_orig$SpringBoard_iOS7$SBDockView$heightForOrientation$);}
+	}
+	
 	LWLog(@"constructor is done");
 }

@@ -100,6 +100,11 @@
 			<string>Landscape style</string>
 			<key>PostNotification</key>
 			<string>de.ng.DockShift.settingsChanged</string>
+			<key>requiredCapabilities</key>
+			<dict>
+				<key>wildcat</key>
+				<false/>
+			</dict>
 			<key>validTitles</key>
 			<array>
 				<string>Transparent</string>

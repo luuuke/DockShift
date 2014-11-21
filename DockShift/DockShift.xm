@@ -237,7 +237,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 	if([currentBackgroundView isMemberOfClass:[%c(SBWallpaperEffectView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
 		LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
 		UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
-		if([%c(SBClockDataProvider) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
+		if(!_oniPad && [%c(SBClockDataProvider) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
 			//iOS 8.1 exclusive
 			LWLog(@"orientation is landscape");
 			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; //11=default for 7.1+
