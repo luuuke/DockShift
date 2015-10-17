@@ -9,7 +9,7 @@
 #define STYLEFOR81_LANDSCAPE [_stylesFor71[_landscapeStyleIndex] intValue]
 
 //DEBUG section
-#define kLogFilePath @"/var/mobile/Documents/de.ng.dockshift.log"
+//#define kLogFilePath @"/var/mobile/Documents/de.ng.dockshift.log"
 #define kLogPrefix @"[DockShift]"
 
 static void LWLog(NSString* format, ...){
@@ -50,8 +50,8 @@ static void LWLog(NSString* format, ...){
 @interface SBDockView : UIView
 -(void)_backgroundContrastDidChange:(id)arg1 ;
 //%new'd
--(void)updateDockBackgroundStyle;
--(void)removeWhiteLine;
+-(void)ds_updateDockBackgroundStyle;
+-(void)ds_removeWhiteLine;
 @end
 
 @interface SBRootFolderView
@@ -124,7 +124,6 @@ static BOOL _enabled=YES;
 static NSInteger _dockMode=DEFAULT;
 static BOOL _shiftPageControl=NO;
 static BOOL _hidePageControl=NO;
-static BOOL _forcewhitelineremoval=NO;
 static NSInteger _styleIndex=3;
 static NSInteger _landscapeStyleIndex=3;
 
@@ -161,9 +160,6 @@ static void loadSettings(){
 	temp=[settings objectForKey:@"shiftedpagecontrol"];
 	_shiftPageControl=temp ? [temp boolValue] && _styleIndex==0 : NO;
 	
-	temp=[settings objectForKey:@"forcewhitelineremoval"];
-	_forcewhitelineremoval=temp ? [temp boolValue] : NO;
-	
 	temp=[settings objectForKey:@"hiddenpagecontrol"];
 	_hidePageControl=temp ? [temp boolValue] : NO;
 	
@@ -178,7 +174,7 @@ static void settingsChanged(CFNotificationCenterRef center, void *observer, CFSt
 
 static void updateDockBackgroundView(){
 	id dockView=[[[[%c(SBIconController) sharedInstance] _rootFolderController] contentView] dockView];
-	[dockView updateDockBackgroundStyle];
+	[dockView ds_updateDockBackgroundStyle];
 	if([dockView respondsToSelector:@selector(_backgroundContrastDidChange:)]){
 		[dockView _backgroundContrastDidChange:nil];
 	}
@@ -215,7 +211,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 	_forceEffectViewDockBackground=YES;
 	id r=%orig;
 	_forceEffectViewDockBackground=NO;
-	[self removeWhiteLine];
+	[self ds_removeWhiteLine];
 	return r;
 }
 
@@ -227,17 +223,17 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 
 -(void)layoutSubviews{
 	%orig;
-	[self updateDockBackgroundStyle];
-	self.hidden=_dockMode==NONE;
+	[self ds_updateDockBackgroundStyle];
+	self.hidden=(_dockMode==NONE);
 }
 
 %new
--(void)updateDockBackgroundStyle{
+-(void)ds_updateDockBackgroundStyle{
 	id currentBackgroundView=MSHookIvar<id>(self, "_backgroundView");
 	if([currentBackgroundView isMemberOfClass:[%c(SBWallpaperEffectView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
 		LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
 		UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
-		if(!_oniPad && [%c(SBClockDataProvider) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
+		if([%c(SBAppSwitcherContainer) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
 			//iOS 8.1 exclusive
 			LWLog(@"orientation is landscape");
 			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; //11=default for 7.1+
@@ -251,20 +247,18 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 		//iOS 7.0
 		[(_SBDockBackgroundView*)currentBackgroundView setStyle:_enabled?STYLEFOR70:7/* 7=default for 7.0*/];
 	}
-	[self removeWhiteLine];
+	[self ds_removeWhiteLine];
 }
 
 %new
--(void)removeWhiteLine{
+-(void)ds_removeWhiteLine{
 	if(_enabled){
 		LWLog(@"Removing annoying white line");
 		SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
-		
-		if(_forcewhitelineremoval || _styleIndex==0){
-			[highlightView removeFromSuperview];
-			[highlightView setHidden:YES];
-			[highlightView setAlpha:0];
-		}
+		//absolutely terminate that thing
+		[highlightView removeFromSuperview];
+		[highlightView setHidden:YES];
+		[highlightView setAlpha:0];
 	}
 }
 
@@ -274,6 +268,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 
 -(CGFloat)topIconInset{
 	if(_dockMode != DEFAULT){
+        LWLog(@"Shifting topIconInset");
 		switch(_dockMode){
 			case NONESTRETCHED: return 200;
 			case SMALLWITHLABELS: return _oniPad?24:19;
@@ -292,6 +287,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 
 -(void)setBounds:(CGRect)bounds{
 	if(_enabled && _shiftPageControl){
+        LWLog(@"Shifting page dots");
 		CGFloat y=0;
 		switch(_dockMode){
 			case DEFAULT: y=_oniPad?0:-5; break;
@@ -307,6 +303,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 -(void)layoutSubviews{
 	%orig;
 	if(_enabled && _hidePageControl){
+        LWLog(@"Hiding page dots");
 		self.hidden=YES;
 	}
 }
@@ -346,6 +343,7 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 -(CGFloat)heightForOrientation:(NSInteger)orientation{
 	CGFloat r=%orig;
 	if(_dockMode != DEFAULT){
+        LWLog(@"Changing heightForOrientation");
 		if(_dockMode==SMALLWITHLABELS){
 			r=_oniPad?111:88;
 		}else if(_dockMode==SMALLWITHOUTLABELS){
@@ -356,7 +354,6 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 			r=-10;
 		}
 	}
-	
 	return r;
 }
 
@@ -370,10 +367,12 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 	MSHookFunction(_UIAccessibilityEnhanceBackgroundContrast,
 				   my_UIAccessibilityEnhanceBackgroundContrast,
 				   &their_UIAccessibilityEnhanceBackgroundContrast);
-	
+    LWLog(@"Loading general hooks");
 	%init(SpringBoard_General);
-	if(![%c(SBClockDataProvider) class]){
-		//7.1
+	
+	//iOS 8 (SBAppSwitcherContainer) and iOS 9 (SBMainDisplaySceneLayoutGestureManager) exclusive classes
+    if(![%c(SBAppSwitcherContainer) class] && ![%c(SBMainDisplaySceneLayoutGestureManager) class]){
+		LWLog(@"Loading iOS 7 hooks");
 		%init(SpringBoard_iOS7);
 	}
 	
