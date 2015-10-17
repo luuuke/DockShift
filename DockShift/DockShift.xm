@@ -4,9 +4,11 @@
 
 #pragma mark - Defines
 
-#define STYLEFOR70 [_stylesFor70[_styleIndex] intValue]
-#define STYLEFOR71 [_stylesFor71[_styleIndex] intValue]
-#define STYLEFOR81_LANDSCAPE [_stylesFor71[_landscapeStyleIndex] intValue]
+#define STYLEFOR70				[_stylesFor70[_styleIndex] intValue]
+#define STYLEFOR71				[_stylesFor71[_styleIndex] intValue]
+#define STYLEFOR81_LANDSCAPE	[_stylesFor71[_landscapeStyleIndex] intValue]
+#define STYLEFOR9				[_stylesFor9[_styleIndex] intValue]
+#define STYLEFOR9_LANDSCAPE		[_stylesFor9[_landscapeStyleIndex] intValue]
 
 //DEBUG section
 //#define kLogFilePath @"/var/mobile/Documents/de.ng.dockshift.log"
@@ -116,6 +118,10 @@ static NSArray* _stylesFor71=@[@14,
 							   @22,@9,@11,@23,@16,@20,
 							   @12,@17,
 							   @19,@3,@4];
+static NSArray* _stylesFor9=@[@15,
+							  @9,@23,@12,@10,@24,@27,
+							  @18,@25,
+							  @3,@8,@6];
 
 static const BOOL _oniPad=UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 static BOOL _forceEffectViewDockBackground=NO;
@@ -126,6 +132,11 @@ static BOOL _shiftPageControl=NO;
 static BOOL _hidePageControl=NO;
 static NSInteger _styleIndex=3;
 static NSInteger _landscapeStyleIndex=3;
+
+#ifdef SCREENSHOT_MODE
+static int style=25;
+static BOOL firstStyle=YES;
+#endif
 
 #pragma mark - Functions
 
@@ -165,6 +176,14 @@ static void loadSettings(){
 	
 	[temp release];
 	[settings release];
+
+	#ifdef SCREENSHOT_MODE
+	if (firstStyle) {
+		firstStyle=NO;
+	} else {
+		style++;
+	}
+	#endif
 }
 
 static void settingsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
@@ -231,21 +250,40 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 -(void)ds_updateDockBackgroundStyle{
 	id currentBackgroundView=MSHookIvar<id>(self, "_backgroundView");
 	if([currentBackgroundView isMemberOfClass:[%c(SBWallpaperEffectView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
-		LWLog(@"Updating background style for iOS 7.1 or 8.1, _styleIndex=%i, style=%i", _styleIndex, STYLEFOR71);
+		LWLog(@"Updating background style for iOS 7.1 or 8.1+, _styleIndex=%i", _styleIndex);
 		UIInterfaceOrientation orientation=[UIApplication sharedApplication].statusBarOrientation;
-		if([%c(SBAppSwitcherContainer) class] && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
-			//iOS 8.1 exclusive
+		if(([%c(SBAppSwitcherContainer) class] || [%c(SBMedusaSettings) class]) && (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)){
+			//iOS 8.1 and iOS 9 exclusive
 			LWLog(@"orientation is landscape");
-			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR81_LANDSCAPE:11]; //11=default for 7.1+
+			#ifndef SCREENSHOT_MODE
+			int style;
+			if ([%c(SBAppSwitcherContainer) class]) {
+				style = _enabled ? STYLEFOR81_LANDSCAPE : 11;
+			} else if ([%c(SBMedusaSettings) class]) {
+				style = _enabled ? STYLEFOR9_LANDSCAPE : 7;
+			}
+			#endif
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:style];
 		}else{
-			//iOS 7.1 and 8.1
-			LWLog(@"orientation is portrait or we're on iOS7");
-			[(SBWallpaperEffectView*)currentBackgroundView setStyle:_enabled?STYLEFOR71:11]; //11=default for 7.1+
+			//iOS 7.1 and 8.1+
+			#ifndef SCREENSHOT_MODE
+			int style;
+			if ([%c(SBMedusaSettings) class]) {
+				//iOS 9
+				style = _enabled ? STYLEFOR9 : 7;
+			} else {
+				//iOS 7.1 - 8.4.1
+				style = _enabled ? STYLEFOR71 : 11;
+			}
+			#endif
+			LWLog(@"orientation is portrait or we're on iOS7, style=%i", style);
+			
+			[(SBWallpaperEffectView*)currentBackgroundView setStyle:style];
 		}
 	}else if([currentBackgroundView isMemberOfClass:[%c(_SBDockBackgroundView) class]] && [currentBackgroundView respondsToSelector:@selector(setStyle:)]){
 		LWLog(@"Updating background style for iOS 7.0");
 		//iOS 7.0
-		[(_SBDockBackgroundView*)currentBackgroundView setStyle:_enabled?STYLEFOR70:7/* 7=default for 7.0*/];
+		[(_SBDockBackgroundView*)currentBackgroundView setStyle:_enabled ? STYLEFOR70 : 7];
 	}
 	[self ds_removeWhiteLine];
 }
@@ -253,7 +291,6 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
 %new
 -(void)ds_removeWhiteLine{
 	if(_enabled){
-		LWLog(@"Removing annoying white line");
 		SBHighlightView* highlightView=MSHookIvar<SBHighlightView*>(self, "_highlightView");
 		//absolutely terminate that thing
 		[highlightView removeFromSuperview];
@@ -370,11 +407,31 @@ BOOL my_UIAccessibilityEnhanceBackgroundContrast(){
     LWLog(@"Loading general hooks");
 	%init(SpringBoard_General);
 	
-	//iOS 8 (SBAppSwitcherContainer) and iOS 9 (SBMainDisplaySceneLayoutGestureManager) exclusive classes
-    if(![%c(SBAppSwitcherContainer) class] && ![%c(SBMainDisplaySceneLayoutGestureManager) class]){
+	//iOS 8 (SBAppSwitcherContainer) and iOS 9 (SBMedusaSettings) exclusive classes
+    if(![%c(SBAppSwitcherContainer) class] && ![%c(SBMedusaSettings) class]){
 		LWLog(@"Loading iOS 7 hooks");
 		%init(SpringBoard_iOS7);
 	}
 	
 	LWLog(@"constructor is done");
+	
+	#ifdef SCREENSHOT_MODE
+	//a quickly hacked together piece of code which creates screenshots of all the styles
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+		LWLog(@"starting screenshotting");
+		int i = 1;
+		while (i < (32-style+1)) {
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (i*10) * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+				LWLog(@"making screenshot for style %i", style);
+				[[%c(SBScreenShotter) sharedInstance] saveScreenshotsShowingFlash:YES completion:^{
+					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (2) * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+						loadSettings();
+						updateDockBackgroundView();
+					});
+				}];
+			});
+			i++;
+		}
+	});
+	#endif
 }

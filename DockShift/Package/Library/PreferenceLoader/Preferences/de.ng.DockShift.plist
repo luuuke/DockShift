@@ -33,7 +33,7 @@
 		</dict>
 		<dict>
 			<key>footerText</key>
-			<string>Landscape style is just available on iOS 8 and determines the dock background in landscape orientation.</string>
+			<string>Landscape style is just available on iOS 8+ and determines the dock background in landscape orientation.</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
@@ -65,9 +65,9 @@
 				<string>Milk Glass - clear</string>
 				<string>Dark Milk Glass - opaque</string>
 				<string>Dark Milk Glass - bit less opaque</string>
-				<string>Blurried - most blurry</string>
-				<string>Blurried - in between</string>
-				<string>Blurried - clearer</string>
+				<string>Blurred - most blurry</string>
+				<string>Blurred - in between</string>
+				<string>Blurred - clearer</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -111,9 +111,9 @@
 				<string>Milk Glass - clear</string>
 				<string>Dark Milk Glass - opaque</string>
 				<string>Dark Milk Glass - bit less opaque</string>
-				<string>Blurried - most blurry</string>
-				<string>Blurried - in between</string>
-				<string>Blurried - clearer</string>
+				<string>Blurred - most blurry</string>
+				<string>Blurred - in between</string>
+				<string>Blurred - clearer</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -174,7 +174,7 @@
 			<string>Dock size alterations</string>
 			<key>footerText</key>
 			<string>iOS 7 only.
-Small also streches the icon layout vertically, you may need to respring after applying this setting.</string>
+Small also stretches the icon layout vertically, you may need to respring after applying this setting.</string>
 		</dict>
 		<dict>
 			<key>detail</key>
